@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525230710) do
-
-  create_table "shipping_methods_zones", :id => false, :force => true do |t|
-    t.integer "shipping_method_id"
-    t.integer "zone_id"
-  end
+ActiveRecord::Schema.define(:version => 20130627183354) do
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -454,6 +449,11 @@ ActiveRecord::Schema.define(:version => 20130525230710) do
     t.string   "tracking_url"
   end
 
+  create_table "spree_shipping_methods_zones", :id => false, :force => true do |t|
+    t.integer "shipping_method_id"
+    t.integer "zone_id"
+  end
+
   create_table "spree_shipping_rates", :force => true do |t|
     t.integer  "shipment_id"
     t.integer  "shipping_method_id"
@@ -464,6 +464,17 @@ ActiveRecord::Schema.define(:version => 20130525230710) do
   end
 
   add_index "spree_shipping_rates", ["shipment_id", "shipping_method_id"], :name => "spree_shipping_rates_join_index", :unique => true
+
+  create_table "spree_skrill_transactions", :force => true do |t|
+    t.string   "email"
+    t.float    "amount"
+    t.string   "currency"
+    t.integer  "transaction_id"
+    t.integer  "customer_id"
+    t.string   "payment_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "spree_state_changes", :force => true do |t|
     t.string   "name"
